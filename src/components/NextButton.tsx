@@ -1,19 +1,13 @@
 import React from "react";
-import { Action, InitialState } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface NextButtonProps {
-  dispatch: React.Dispatch<Action>;
-  answers: InitialState["answers"];
-  index: InitialState["index"];
-  numQuestions: number;
+  //
 }
 
-const NextButton: React.FC<NextButtonProps> = ({
-  dispatch,
-  answers,
-  index: questionIndex,
-  numQuestions,
-}): JSX.Element | null => {
+const NextButton: React.FC<NextButtonProps> = (): JSX.Element | null => {
+  const { answers, index: questionIndex, questions, dispatch } = useQuiz();
+  const numQuestions = questions?.length;
   if (answers[questionIndex] === undefined) return null;
 
   const handleNextQuestion = () => {

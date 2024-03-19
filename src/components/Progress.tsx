@@ -1,21 +1,20 @@
 import React from "react";
-import { InitialState } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface ProgressProps {
-  numQuestions: number;
-  maxPossiblePoints: number;
-  index: InitialState["index"];
-  points: InitialState["points"];
-  answers: InitialState["answers"];
+  //
 }
 
-const Progress: React.FC<ProgressProps> = ({
-  index: questionIndex,
-  numQuestions,
-  points,
-  maxPossiblePoints,
-  answers,
-}): JSX.Element | null => {
+const Progress: React.FC<ProgressProps> = (): JSX.Element | null => {
+  const {
+    questions,
+    index: questionIndex,
+    points,
+    maxPossiblePoints,
+    answers,
+  } = useQuiz();
+
+  const numQuestions = questions?.length || 0;
   return (
     <header className="progress">
       <progress

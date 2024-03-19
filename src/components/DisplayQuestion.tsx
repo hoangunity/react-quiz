@@ -1,32 +1,19 @@
 import React from "react";
-import { Action, InitialState, Question } from "../App";
 import Options from "./Options";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface QuestionProps {
-  question: Question;
-  answers: InitialState["answers"];
-  dispatch: React.Dispatch<Action>;
-  index: InitialState["index"];
+  //
 }
 
-const DisplayQuestion: React.FC<QuestionProps> = ({
-  question,
-  answers,
-  dispatch,
-  index,
-}): JSX.Element | null => {
-  const { question: questionTitle, correctOption, options } = question;
+const DisplayQuestion: React.FC<QuestionProps> = (): JSX.Element | null => {
+  const { questions, index } = useQuiz();
+  const { question: questionTitle } = questions[index];
   return (
     <div>
       <h4>{questionTitle}</h4>
 
-      <Options
-        index={index}
-        options={options}
-        dispatch={dispatch}
-        answers={answers}
-        correctOption={correctOption}
-      />
+      <Options />
     </div>
   );
 };

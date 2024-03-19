@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import { Action, InitialState } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface TimerProps {
-  secondsRemaining: InitialState["secondsRemaining"];
-  dispatch: React.Dispatch<Action>;
+  //
 }
 
-const Timer: React.FC<TimerProps> = ({
-  secondsRemaining,
-  dispatch,
-}): JSX.Element | null => {
+const Timer: React.FC<TimerProps> = (): JSX.Element | null => {
+  const { secondsRemaining, dispatch } = useQuiz();
   const mins = Math.floor(secondsRemaining! / 60);
   const seconds = secondsRemaining! % 60;
 

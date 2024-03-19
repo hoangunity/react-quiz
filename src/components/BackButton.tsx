@@ -1,19 +1,14 @@
 import React from "react";
-import { Action, InitialState } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface BackButtonProps {
-  index: InitialState["index"];
-  answers: InitialState["answers"];
-  dispatch: React.Dispatch<Action>;
-  numQuestions: number;
+  //
 }
 
-const BackButton: React.FC<BackButtonProps> = ({
-  answers,
-  dispatch,
-  index: questionIndex,
-  numQuestions,
-}): JSX.Element | null => {
+const BackButton: React.FC<BackButtonProps> = (): JSX.Element | null => {
+  const { answers, index: questionIndex, questions, dispatch } = useQuiz();
+  const numQuestions = questions?.length || 0;
+
   const renderCondition =
     answers.length > 0 &&
     questionIndex < numQuestions - 1 &&

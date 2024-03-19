@@ -1,20 +1,13 @@
 import React from "react";
-import { Action, InitialState } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface FinishScreenProps {
-  points: InitialState["points"];
-  highScore: InitialState["highScore"];
-  dispatch: React.Dispatch<Action>;
-  maxPossiblePoints: number;
+  //
 }
 
-const FinishScreen: React.FC<FinishScreenProps> = ({
-  maxPossiblePoints,
-  points,
-  highScore,
-  dispatch,
-}): JSX.Element | null => {
-  const percentage = (points / maxPossiblePoints) * 100;
+const FinishScreen: React.FC<FinishScreenProps> = (): JSX.Element | null => {
+  const { points, maxPossiblePoints, dispatch, highScore } = useQuiz();
+  const percentage = Number((points / maxPossiblePoints) * 100);
 
   let emoji: string = "";
   if (percentage === 100) emoji = "🥇";

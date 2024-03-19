@@ -1,22 +1,14 @@
 import React from "react";
-import { Action, InitialState, Question } from "../App";
+import { useQuiz } from "../hooks/useQuiz";
 
 interface OptionsProps {
-  options: Question["options"];
-  correctOption: Question["correctOption"];
-  dispatch: React.Dispatch<Action>;
-  answers: InitialState["answers"];
-  index: InitialState["index"];
+  //
 }
 
-const Options: React.FC<OptionsProps> = ({
-  options,
-  answers,
-  dispatch,
-  correctOption,
-  index: questionIndex,
-}): JSX.Element | null => {
+const Options: React.FC<OptionsProps> = (): JSX.Element | null => {
+  const { answers, index: questionIndex, dispatch, questions } = useQuiz();
   const hasAnswered: boolean = answers[questionIndex] !== undefined;
+  const { correctOption, options } = questions[questionIndex];
 
   const handleOptionClick = (optionIndex: number): void => {
     dispatch({ type: "newAnswer", payload: optionIndex });
